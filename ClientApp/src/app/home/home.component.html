@@ -1,0 +1,92 @@
+<div class="jumbotron container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>This is the bootstrap grid system</h1>
+        </div>
+        <div class="col-md-2">
+            <label for="firstname" style="width: 100%;">Firstname</label>
+        </div>
+        <div class="col-md-4">
+            <input id="firstname" type="text" pInputText style="width: 100%;"> 
+        </div>
+        <div class="col-md-2">
+            <label for="lastname" style="width: 100%;">Lastname</label>
+        </div>
+        <div class="col-md-4">
+            <input id="lastname" type="text" pInputText style="width: 100%;"> 
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <label for="address" style="width: 100%;">Address</label>
+        </div>
+        <div class="col-md-10">
+            <textarea id="address" type="text" rows="4" pInputTextarea style="width: 100%;"></textarea>
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-md-2">
+            <label for="city" style="width: 100%;">City</label>
+        </div>
+        <div class="col-md-4">
+            <input id="city" type="text" pInputText style="width: 100%;">  
+        </div>
+        <div class="col-md-2">
+            <label for="state" style="width: 100%;">State</label>
+        </div>
+        <div class="col-md-4">
+            <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Select" optionLabel="name" [style]="{'width':'100%'}">
+            </p-dropdown>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="zip"  style="width: 100%;">Zip</label>
+        </div>
+        <div class="col-md-4">
+            <input id="zip" type="text" pInputText  style="width: 100%;"> 
+        </div>
+    </div>
+    
+    
+    <div class="p-grid">
+        
+        <div class="p-col-12">
+            <h1>This is the primeng flex grid system</h1>
+        </div>
+        <div class="p-col-2">2</div>
+        <div class="p-col-6">6</div>
+        <div class="p-col-4">4</div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" type="text" pInputText> 
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+            <label for="lastname">Lastname</label>
+            <input id="lastname" type="text" pInputText> 
+        </div>
+        <div class="p-field p-col-12">
+            <label for="address">Address</label>
+            <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+            <label for="city">City</label>
+            <input id="city" type="text" pInputText> 
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <label for="state">State</label>
+            <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Select" optionLabel="name"></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <label for="zip">Zip</label>
+            <input id="zip" type="text" pInputText> 
+        </div>
+    </div>
+</div>

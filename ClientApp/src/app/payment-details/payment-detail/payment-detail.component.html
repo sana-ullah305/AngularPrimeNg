@@ -1,0 +1,101 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <div class="p-fluid p-formgrid p-grid">
+        <input type="hidden" name="PMId" [(ngModel)]="paymentService.formData.PMId">
+        <div class="p-field p-col-12 p-md-6">
+            <label for="cardOwnerName">Card Owner Name</label>
+            <input id="cardOwnerName" pInputText name="CardOwnerName" #CardOwnerName="ngModel"
+                [(ngModel)]="paymentService.formData.CardOwnerName" placeholder="Card Owner Name" maxlength="100" required>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+            <label for="cardNumber">Card Number</label>
+            <input id="cardNumber" pInputText name="CardNumber" #CardNumber="ngModel"
+                [(ngModel)]="paymentService.formData.CardNumber" placeholder="16 Digit Card Number" required
+                maxlength="16" minlength="16">
+        </div>
+    </div>
+
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+            <label for="expirationDate">ExpirationsDate</label>
+            <p-inputMask mask="99/99" id="expirationsDate" name="ExpirationsDate" #ExpirationsDate="ngModel"
+            [(ngModel)]="paymentService.formData.ExpirationsDate" placeholder="MM/YY" required maxlength="5"
+            minlength="5"></p-inputMask>
+            <!-- <input pInputText id="expirationsDate" name="ExpirationsDate" #ExpirationsDate="ngModel"
+                [(ngModel)]="paymentService.formData.ExpirationsDate" placeholder="MM/YY" required maxlength="5"
+                minlength="5"> -->
+        </div>
+
+        <div class="p-field p-col-12 p-md-6">
+            <label for="cVV">CVV</label>
+            <p-inputMask mask="999" id="cVV" name="CVV" #CVV="ngModel"
+                [(ngModel)]="paymentService.formData.CVV" placeholder="CVV" required maxlength="3" minlength="3">
+            </p-inputMask>
+        </div>
+        
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+            <label for="country">Country</label>
+            <p-dropdown id="country" [options]="paymentService.countries" required name="Country" dataKey="name" [(ngModel)]="paymentService.selectedCountry" #Country optionLabel="CountryName"></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+            <label for="state">State</label>
+            <p-dropdown id="state" [options]="paymentService.states" required name="State" dataKey="name" [(ngModel)]="paymentService.selectedState" #State optionLabel="StateName"></p-dropdown>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-12">
+            <label for="narrtions">Narrtions</label>
+            <textarea id="narrtions" [rows]="5" [cols]="12" pInputTextarea autoResize="autoResize" name="Narrtions"
+             maxlength="246" [(ngModel)]="paymentService.formData.Narrtions" #Narrtions></textarea>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+            <label for="paymentDetailsMSCRows">MS Countries</label>
+            <p-multiSelect id="paymentDetailsMSCRows" name="PaymentDetailsMSCRows" #PaymentDetailsMSCRows [options]="paymentService.countries" optionLabel="CountryName" [(ngModel)]="paymentService.formData.PaymentDetailsMSCRows"></p-multiSelect>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+            <label for="rating">Rating</label>
+            <p-rating id="rating" name="Rating" [(ngModel)]="paymentService.formData.Rating" #Rating>
+            </p-rating>
+        </div>
+    </div>
+    <div class="p-grid" style="text-align: right;">
+        <div class="p-col-12">
+            <button pButton type="button" (click)="resetForm();" label="Clear" icon="pi pi-times"></button>&nbsp;&nbsp;&nbsp;
+            <button *ngIf="paymentService.formData.PMId===0" pButton type="submit" label="Save" icon="pi pi-check" [disabled]="form.invalid"></button>
+            <button *ngIf="paymentService.formData.PMId!==0" pButton type="submit" label="update" icon="pi pi-pencil" [disabled]="form.invalid"></button>
+            <!-- <button pButton class="btn btn-success btn-lg btn-block" type="submit" label="Submit" ><i class="pi pi-save"></i></button> -->
+            <!-- label="*ngIf='paymentService.formData.PMId===0' ? Save : update" -->
+        </div>
+    </div>
+   
+</form>
+        <!-- <p-inputMask [(ngModel)]="val" mask="999"></p-inputMask> -->
+<!-- <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-md-6">
+        <label for="firstname">Firstname</label>
+        <input id="firstname" type="text" pInputText placeholder="First Name">
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+        <label for="lastname">Lastname</label>
+        <input id="lastname" type="text" pInputText placeholder="Last Name">
+    </div>
+    <div class="p-field p-col-12">
+        <label for="address">Address</label>
+        <textarea id="address" type="text" rows="4" pInputTextarea></textarea>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+        <label for="city">City</label>
+        <input id="city" type="text" pInputText>
+    </div>
+    <div class="p-field p-col-12 p-md-3">
+        <label for="state">State</label>
+        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" placeholder="Select" optionLabel="name"></p-dropdown> 
+    </div>
+    <div class="p-field p-col-12 p-md-3">
+        <label for="zip">Zip</label>
+        <input id="zip" type="text" pInputText>
+    </div>
+</div> -->

@@ -1,0 +1,91 @@
+<!-- <div class="container-fluid">
+    <h1 class="text-center">Payment Details List</h1>
+    <div *ngFor="let payment of paymentService.paymentDetailsList">
+        <li>{{payment.PMId}}</li>
+        <li>{{payment.CardOwnerName}}</li>
+        <li>{{payment.CardNumber}}</li>
+        <li>{{payment.ExpirationsDate}}</li>
+        <li>{{payment.CVV}}</li>
+        <hr>
+    </div>
+</div> -->
+
+<!-- <table class="table table-hover">
+    <tr *ngFor="let pd of paymentService.paymentDetailsList">
+      <td (click)="populateForm(pd)">{{pd.CardOwnerName}}</td>
+      <td (click)="populateForm(pd)">{{pd.CardNumber}}</td>
+      <td (click)="populateForm(pd)">{{pd.ExpirationsDate}}</td>
+      <td>
+        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(pd.PMId)"></i>
+      </td>
+    </tr>
+  </table> -->
+
+  <!-- ------------------------------------------------------------------ -->
+  <div class="card">
+    <p-table #dt [value]="paymentService.paymentDetailsList" [(selection)]="selectedPayments" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50,100]" [loading]="loading"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0" [globalFilterFields]="['CardOwnerName','CardNumber','ExpirationsDate']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                List of Payments
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"></th>
+                <th pSortableColumn="CardOwnerName">Owner Name <p-sortIcon field="CardOwnerName"></p-sortIcon></th>
+                <th pSortableColumn="CardNumber">Card Number <p-sortIcon field="CardNumber"></p-sortIcon></th>
+                <th pSortableColumn="ExpirationsDate">Expirations Date <p-sortIcon field="ExpirationsDate"></p-sortIcon></th>
+                <th style="width: 5rem"></th>
+            </tr>
+            <tr>
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'CardOwnerName', 'startsWith')" placeholder="Search by Owner Name" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'country.CardNumber', 'contains')" placeholder="Search by Card Number" class="p-column-filter">
+                </th>
+                <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'country.ExpirationsDate', 'contains')" placeholder="Search by Expirations Date" class="p-column-filter">
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-payment>
+            <tr class="p-selectable-row">
+                <td>
+                    <p-tableCheckbox [value]="payment"></p-tableCheckbox>
+                </td>
+                <td (click)="populateForm(payment)">
+                    <span class="p-column-title"></span>
+                    {{payment.CardOwnerName}}
+                </td>
+                <td (click)="populateForm(payment)">
+                    <span class="p-column-title"></span>
+                    {{payment.CardNumber}}
+                </td>
+                <td (click)="populateForm(payment)">
+                    <span class="p-column-title"></span>
+                    {{payment.ExpirationsDate}}
+                </td>
+                <td style="text-align: center">
+                    <button pButton type="button" class="p-button-danger" icon="pi pi-trash" (click)="onDelete(payment.PMId)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No payments found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
