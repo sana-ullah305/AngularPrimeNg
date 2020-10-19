@@ -18,12 +18,50 @@
     </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="templateService.showHideTemplateModel">
+<p-dialog [(visible)]="templateService.showHideTemplateModel" [baseZIndex]="10000" [modal]="true"
+ [position]="templateService.dialogPosition" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false" [maximizable]="true">
     <p-header>
-        <h5 *ngIf()></h5>
+        <h5 *ngIf="templateService.templateFormData.Id > 0">Update</h5>
+        <h5 *ngIf="templateService.templateFormData.Id === 0">Save</h5>
     </p-header>
-    Content
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="p-fluid p-formgrid p-grid">
+            <input type="hidden" name="Id" [(ngModel)]="templateService.templateFormData.Id">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="cardOwnerName">Template Name</label>
+                <input id="templateName" pInputText name="TemplateName" #TemplateName="ngModel"
+                    [(ngModel)]="templateService.templateFormData.TemplateName" placeholder="Template Name" maxlength="100" required>
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="docIdentifier">Doc Identifier</label>
+                <input id="docIdentifier" pInputText name="DocIdentifier" #DocIdentifier="ngModel"
+                    [(ngModel)]="templateService.templateFormData.DocIdentifier" placeholder="Doc Identifier" required
+                    maxlength="200">
+            </div>
+        </div>
+    
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="senderName">Sender Name</label>
+                <input pInputText type="text" id="senderName" name="SenderName" #SenderName="ngModel"
+                [(ngModel)]="templateService.templateFormData.SenderName" placeholder="Sender Name" required maxlength="200">
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4 offset-md-4">
+                <label for="pictureFileName">Picture Filename</label>
+                <input type="text" pInputText id="pictureFileName" name="PictureFileName" #PictureFileName="ngModel"
+                    [(ngModel)]="templateService.templateFormData.PictureFileName" placeholder="Picture FileName" required maxlength="128">
+            </div>
+        </div>
+        <div class="p-grid" style="text-align: right;">
+            <div class="p-col-12">
+                <button pButton type="button" (click)="resetForm();" label="Clear" icon="pi pi-times"></button>
+                <button class="p-ml-3" *ngIf="templateService.templateFormData.Id===0" pButton type="submit" label="Save" icon="pi pi-check" [disabled]="form.invalid"></button>
+                <button class="p-ml-3" *ngIf="templateService.templateFormData.Id!==0" pButton type="submit" label="update" icon="pi pi-pencil" [disabled]="form.invalid"></button>
+            </div>
+        </div>
+       
+    </form>
     <p-footer>
-        //buttons
+        <!-- //buttons -->
     </p-footer>
 </p-dialog>

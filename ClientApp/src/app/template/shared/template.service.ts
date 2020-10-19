@@ -11,14 +11,14 @@ import { Template } from './template.model';
 })
 export class TemplateService implements ITemplateService {
   // Template CRUD Functionality
-  showHideTemplateModel:boolean = false;
+  showHideTemplateModel:boolean = true;
   templateList:Template[];
   templateFormData: Template = {
     Id:0,
     TemplateName:null, DocIdentifier:null, SenderName:null, PictureFileName:null,
   };
   // Keyword CRUD Functionlity
-  showHideKeywordModel:boolean = false;
+  showHideKeywordModel:boolean = true;
   keywordList:Keyword[];
   templateId:number;
   keywordFormData: Keyword = {
@@ -47,6 +47,7 @@ export class TemplateService implements ITemplateService {
 
 
   ///Other Controls For Keyword Elements
+  dialogPosition: 'top';
 
   constructor(private http: HttpClient) { }
 

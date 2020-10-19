@@ -20,6 +20,50 @@
         </tr>
     </ng-template>
 </p-table>
+<p-dialog [(visible)]="templateService.showHideKeywordModel" [baseZIndex]="10000" [modal]="true"
+ [position]="templateService.dialogPosition" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <p-header>
+        <h5 *ngIf="templateService.keywordFormData.Id > 0">Update</h5>
+        <h5 *ngIf="templateService.keywordFormData.Id === 0">Save</h5>
+    </p-header>
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="p-fluid p-formgrid p-grid">
+            <input type="hidden" name="Id" [(ngModel)]="templateService.keywordFormData.Id">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="keyword">Keyword</label>
+                <input id="keyword" pInputText name="Keyword" #Keyword="ngModel"
+                    [(ngModel)]="templateService.keywordFormData.Keyword" placeholder="Keyword" maxlength="100" required>
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="schemaId">Schema Id</label>
+                <input id="schemaId" pInputText name="SchemaId" #SchemaId="ngModel"
+                    [(ngModel)]="templateService.keywordFormData.SchemaId" placeholder="Schema Id" required
+                    maxlength="50">
+            </div>
+        </div>
+    
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="senderName">Aws Block</label>
+                <input pInputText id="awsBlock" name="AwsBlock" #AwsBlock="ngModel"
+                [(ngModel)]="templateService.keywordFormData.AwsBlock" placeholder="Aws Block" required maxlength="30">
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4 offset-md-4">
+            </div>
+        </div>
+        <div class="p-grid" style="text-align: right;">
+            <div class="p-col-12">
+                <button pButton type="button" (click)="resetForm();" label="Clear" icon="pi pi-times"></button>
+                <button class="p-ml-3" *ngIf="templateService.keywordFormData.Id===0" pButton type="submit" label="Save" icon="pi pi-check" [disabled]="form.invalid"></button>
+                <button class="p-ml-3" *ngIf="templateService.keywordFormData.Id!==0" pButton type="submit" label="update" icon="pi pi-pencil" [disabled]="form.invalid"></button>
+            </div>
+        </div>
+       
+    </form>
+    <p-footer>
+        <!-- //buttons -->
+    </p-footer>
+</p-dialog>
 
 
 <!-- Id:number;

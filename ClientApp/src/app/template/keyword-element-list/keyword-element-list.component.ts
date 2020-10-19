@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { TemplateService } from '../shared/template.service';
 
 @Component({
   selector: 'app-keyword-element-list',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KeywordElementListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public templateService: TemplateService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
