@@ -1,0 +1,29 @@
+<p-table [value]="templateService.templateList">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>TemplateName</th>
+            <th>DocIdentifier</th>
+            <th>SenderName</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-template>
+        <tr>
+            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.Id}}</td>
+            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.TemplateName}}</td>
+            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.DocIdentifier}}</td>
+            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.SenderName}}</td>
+            <td><button pButtom icon="pi pi-pencil" onclick="populateForm(template);"></button></td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="templateService.showHideTemplateModel">
+    <p-header>
+        <h5 *ngIf()></h5>
+    </p-header>
+    Content
+    <p-footer>
+        //buttons
+    </p-footer>
+</p-dialog>

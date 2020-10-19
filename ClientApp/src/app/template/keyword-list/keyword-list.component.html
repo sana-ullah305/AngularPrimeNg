@@ -1,0 +1,29 @@
+<p-table [value]="templateService.keywordList">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Keyword</th>
+            <th>SchemaId</th>
+            <th>AwsBlock</th>
+            <th>TemplateId</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-template>
+        <tr>
+            <td onclick='templateService.loadKeywordElementTableData("{{template.Id}}");'>{{template.Id}}</td>
+            <td onclick='templateService.loadKeywordElementTableData("{{template.Id}}");'>{{template.Keyword}}</td>
+            <td onclick='templateService.loadKeywordElementTableData("{{template.Id}}");'>{{template.SchemaId}}</td>
+            <td onclick='templateService.loadKeywordElementTableData("{{template.Id}}");'>{{template.AwsBlock}}</td>
+            <td onclick='templateService.loadKeywordElementTableData("{{template.Id}}");'>{{template.TemplateId}}</td>
+            <td onclick=""><button pButtom icon="pi pi-trash" class="btn-lg"></button></td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- Id:number;
+    Keyword:string;
+    SchemaId:string;
+    AwsBlock:string;
+    TemplateId:number; -->

@@ -32,6 +32,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RatingModule} from 'primeng/rating';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { TemplateComponent } from './template/template.component';
+import { TemplateListComponent } from './template/template-list/template-list.component';
+import { KeywordListComponent } from './template/keyword-list/keyword-list.component';
+import { KeywordElementListComponent } from './template/keyword-element-list/keyword-element-list.component';
+import { TemplateService } from './template/shared/template.service';
+import {DialogModule} from 'primeng/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +45,12 @@ import {MultiSelectModule} from 'primeng/multiselect';
     PageNotFoundComponent,
     PaymentDetailsComponent,
     PaymentDetailComponent,
-    PaymentDetailListComponent
+    PaymentDetailListComponent,
+    //Sir Faheem
+    TemplateComponent,
+    TemplateListComponent,
+    KeywordListComponent,
+    KeywordElementListComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +73,14 @@ import {MultiSelectModule} from 'primeng/multiselect';
     PasswordModule,
     ConfirmDialogModule,
     RatingModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DialogModule
   ],
-  providers: [PaymentService,MessageService,ConfirmationService],
+  providers: [MessageService,ConfirmationService,
+  //User Defined Services
+  PaymentService,
+  TemplateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

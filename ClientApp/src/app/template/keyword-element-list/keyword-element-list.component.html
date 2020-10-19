@@ -1,0 +1,38 @@
+<p-table [value]="templateService.keywordElementList">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>ValueStr</th>
+            <th>ValueNum</th>
+            <th>ComparisonType</th>
+            <th>LogicalOperator</th>
+            <th>TemplateKeywordId</th>
+            <th>ElementId</th>
+            <th>Weight</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-template>
+        <tr>
+            <td>{{template.Id}}</td>
+            <td>{{template.ValueStr}}</td>
+            <td>{{template.ValueNum}}</td>
+            <td>{{template.ComparisonType}}</td>
+            <td>{{template.LogicalOperator}}</td>
+            <td>{{template.TemplateKeywordId}}</td>
+            <td>{{template.ElementId}}</td>
+            <td>{{template.Weight}}</td>
+            <td><button pButtom icon="pi pi-trash" class="btn-lg text-danger"></button> <button pButtom icon="pi pi-pencil" class="btn-lg  text-info p-ml-3"></button></td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- 
+Id:number;
+ValueStr:string;
+ValueNum?:string;
+ComparisonType:string;
+LogicalOperator:string;
+TemplateKeywordId?:number;
+ElementId?:number;
+Weight:number; -->

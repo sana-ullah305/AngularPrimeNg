@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseURL:'http://localhost:57595/api/',
+  // baseURL:'http://localhost:57595/api/',
+  baseURL:'http://444d1bcfee35.ngrok.io/',
 };
 
 /*
