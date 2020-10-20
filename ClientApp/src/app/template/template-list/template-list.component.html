@@ -1,23 +1,13 @@
-<p-table [value]="templateService.templateList">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Id</th>
-            <th>TemplateName</th>
-            <th>DocIdentifier</th>
-            <th>SenderName</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-template>
-        <tr>
-            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.Id}}</td>
-            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.TemplateName}}</td>
-            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.DocIdentifier}}</td>
-            <td onclick='templateService.loadKeywordListData("{{template.Id}}");'>{{template.SenderName}}</td>
-            <td><button pButtom icon="pi pi-pencil" onclick="populateForm(template);"></button></td>
-        </tr>
-    </ng-template>
-</p-table>
-
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="text-info p-ml-4">Templates</h4>
+    </div>
+    <div class="col-md-4 text-center">
+        <p-button label="Add New" icon="pi pi-plus" iconPos="left" (click)="addNewTemplate()"></p-button>
+        <p-button label="Refresh" icon="pi pi-refresh" iconPos="left" (click)="reloadTemplateTable()"></p-button>
+    </div>
+</div>
+<!-- Dialog Template -->
 <p-dialog [(visible)]="templateService.showHideTemplateModel" [baseZIndex]="10000" [modal]="true"
  [position]="templateService.dialogPosition" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false" [maximizable]="true">
     <p-header>
@@ -65,3 +55,54 @@
         <!-- //buttons -->
     </p-footer>
 </p-dialog>
+
+
+<p-table #dt [value]="templateService.templateList" [rowHover]="true" [loading]="templateService.loading" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [paginator]="true" dataKey="id" [rowsPerPageOptions]="[10,25,50,100]" [filterDelay]="0"
+    [globalFilterFields]="['temp.TemplateName']">
+    <ng-template pTemplate="header">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </span>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th pSortableColumn="TemplateName">Template Name <p-sortIcon field="TemplateName"></p-sortIcon>
+            </th>
+            <th style="width: 5rem"></th>
+        </tr>
+        <tr>
+            <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'Id', 'contains')"
+                    placeholder="Search Id" class="p-column-filter">
+            </th>
+            <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'TemplateName', 'contains')"
+                    placeholder="Search by Template Name" class="p-column-filter">
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-template>
+        <tr class="p-selectable-row">
+            <td>
+                <span class="p-column-title"></span>
+                {{template.Id}}
+            </td>
+            <td>
+                <span class="p-column-title"></span>
+                {{template.TemplateName}}
+            </td>
+            <td style="text-align: center">
+                <button pButton type="button" class="p-button-primary" icon="pi pi-pencil"
+                    onclick="populateForm(template);"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+

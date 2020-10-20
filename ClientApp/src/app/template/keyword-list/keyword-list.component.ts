@@ -77,4 +77,16 @@ export class KeywordListComponent implements OnInit {
     this.templateService.showHideKeywordEelementsModel = false;
     console.log(this.templateService.keywordFormData);
   }
+
+  reloadKeywordTable(){
+    debugger;
+    this.templateService.getKeywords();
+  }
+
+  addNewKeyword(){
+    this.resetForm();
+    this.templateService.showHideTemplateModel = false;
+    this.templateService.showHideKeywordEelementsModel = false;
+    this.templateService.showHideKeywordModel = true;
+  }
 }

@@ -1,3 +1,12 @@
+<div class="row">
+    <div class="col-md-10">
+        <h4 class="text-info p-ml-4">Keyword Elements</h4>
+    </div>
+    <div class="col-md-2 text-center">
+        <p-button label="Add New" icon="pi pi-plus" iconPos="left" (click)="addNewKeywordElement();"></p-button>
+        <p-button label="Refresh" icon="pi pi-refresh" iconPos="left" class="p-ml-2" (click)="reloadKeywordElementTable();"></p-button>
+    </div>
+</div>
 <p-table [value]="templateService.keywordElementList">
     <ng-template pTemplate="header">
         <tr>
@@ -27,12 +36,65 @@
     </ng-template>
 </p-table>
 
-<!-- 
-Id:number;
-ValueStr:string;
-ValueNum?:string;
-ComparisonType:string;
-LogicalOperator:string;
-TemplateKeywordId?:number;
-ElementId?:number;
-Weight:number; -->
+<p-dialog [(visible)]="templateService.showHideKeywordEelementsModel" [baseZIndex]="10000" [modal]="true"
+ [position]="templateService.dialogPosition" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <p-header>
+        <h5 *ngIf="templateService.keywordEelementFormData.Id > 0">Update</h5>
+        <h5 *ngIf="templateService.keywordEelementFormData.Id === 0">Save</h5>
+    </p-header>
+    <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="p-fluid p-formgrid p-grid">
+            <input type="hidden" name="Id" [(ngModel)]="templateService.keywordEelementFormData.Id">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="salueStr">Value Str</label>
+                <input id="salueStr" pInputText name="ValueStr" #ValueStr="ngModel"
+                    [(ngModel)]="templateService.keywordEelementFormData.ValueStr" placeholder="Value Str" maxlength="100" required>
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="valueNum">Value Num</label>
+                <input id="valueNum" pInputText name="ValueNum" #ValueNum="ngModel"
+                    [(ngModel)]="templateService.keywordEelementFormData.ValueNum" placeholder="Value Num" required
+                    maxlength="50">
+            </div>
+        </div>
+    
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="comparisonType">Comparison Type</label>
+                <p-dropdown id="comparisonType" name="ComparisonType" #ComparisonType="ngModel" [options]="templateService.comparisonTypeList" #ComparisonType="ngModel" [(ngModel)]="templateService.selectedComparisonType"
+                        optionLabel="ComText" [style]="{'width':'100%'}" [showClear]="true">
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4 offset-md-4">
+                <label for="logicalType">Logical Type</label>
+                    <p-dropdown id="logicalType" name="LogicalType" [options]="templateService.logicalOperatorList" #LogicalType="ngModel" [(ngModel)]="templateService.selectedLogicalOperator"
+                        optionLabel="LogText" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+
+    
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4 p-lg-4">
+                <label for="weight">Weight</label>
+                <input id="weight" name="Weight" type="text" pInputText [(ngModel)]="templateService.keywordEelementFormData.Weight" #Weight="ngModel" [style]="{'width':'100%'}">
+            </div>
+            <div class="p-field p-col-12 p-md-4 p-lg-4 offset-md-4">
+                <label>Element Name</label>
+                <p-dropdown name="" [options]="templateService.identifyingElementList" #ElementName="ngModel" [(ngModel)]="templateService.selectedIdentifying"
+                optionLabel="ElementName" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="p-grid" style="text-align: right;">
+            <div class="p-col-12">
+                <button pButton type="button" (click)="resetForm();" label="Clear" icon="pi pi-times"></button>
+                <button class="p-ml-3" *ngIf="templateService.keywordEelementFormData.Id===0" pButton type="submit" label="Save" icon="pi pi-check" [disabled]="form.invalid"></button>
+                <button class="p-ml-3" *ngIf="templateService.keywordEelementFormData.Id!==0" pButton type="submit" label="update" icon="pi pi-pencil" [disabled]="form.invalid"></button>
+            </div>
+        </div>
+       
+    </form>
+    <p-footer>
+        <!-- //buttons -->
+    </p-footer>
+</p-dialog>

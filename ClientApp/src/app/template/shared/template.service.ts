@@ -11,14 +11,15 @@ import { Template } from './template.model';
 })
 export class TemplateService implements ITemplateService {
   // Template CRUD Functionality
-  showHideTemplateModel:boolean = true;
+  showHideTemplateModel:boolean = false;
   templateList:Template[];
   templateFormData: Template = {
     Id:0,
     TemplateName:null, DocIdentifier:null, SenderName:null, PictureFileName:null,
+    FlgDeleted:null,UpdatedOnUtc:null
   };
   // Keyword CRUD Functionlity
-  showHideKeywordModel:boolean = true;
+  showHideKeywordModel:boolean = false;
   keywordList:Keyword[];
   templateId:number;
   keywordFormData: Keyword = {
@@ -45,6 +46,13 @@ export class TemplateService implements ITemplateService {
   identifyingElementList: IdentifyingElement[];
   selectedIdentifying: IdentifyingElement;
 
+  comparisonTypeList:IComparisonType[];
+  selectedComparisonType:IComparisonType;
+
+  logicalOperatorList:ILogicalOperator[];
+  selectedLogicalOperator:ILogicalOperator;
+  loading:boolean = true;
+  
 
   ///Other Controls For Keyword Elements
   dialogPosition: 'top';
@@ -52,9 +60,10 @@ export class TemplateService implements ITemplateService {
   constructor(private http: HttpClient) { }
 
   ///Templates
-  getAllTemplates(): any {
+  getAllTemplates() {
     this.http.get<Template[]>(environment.baseURL + 'Template/GetTemplateList').toPromise().then(res => this.templateList = res);
-    console.log(this.templateList);
+    debugger;
+    // console.log(this.templateList);
   }
   saveTemplate() {
     return this.http.post(environment.baseURL +'Template/SaveTemplate', this.templateFormData);
@@ -78,8 +87,30 @@ export class TemplateService implements ITemplateService {
  
 //DDL Call for Identification Element
   getIdentifyingElementList() {
-    return this.http.get<IdentifyingElement[]>('Template/GetIdentifyingElementList').toPromise().then(res => this.identifyingElementList = res);
+    return this.http.get<IdentifyingElement[]>('Template/GetIdentifyingElementList?').toPromise().then(res => this.identifyingElementList = res);
   }
+
+
+  loadComparisonTypeDDL(){
+    // equals, contains, is_any_number, greater_than, less_then
+  this.comparisonTypeList = [
+    {ComText: 'Select Comparison Type', ComValue: null},
+    {ComText: 'equals', ComValue: 'equals'},
+    {ComText: 'contains', ComValue: 'contains'},
+    {ComText: 'is_any_number', ComValue: 'is_any_number'},
+    {ComText: 'greater_than', ComValue: 'greater_than'},
+    {ComText: 'less_then', ComValue: 'less_then'}
+];
+console.log(this.comparisonTypeList);
+}
+loadLogicalOperatorDDL(){
+// AND , OR
+this.logicalOperatorList = [
+{LogText: 'Select Logical Type', LogValue: null},
+{LogText: 'AND', LogValue: 'AND'},
+{LogText: 'OR', LogValue: 'OR'},
+];
+}
 }
 
 interface ITemplateService{
@@ -94,4 +125,17 @@ interface ITemplateService{
 
   //DDL Call for Identification Element
   getIdentifyingElementList();
+  
+  loadLogicalOperatorDDL();
+  loadComparisonTypeDDL();
+}
+
+interface ILogicalOperator{
+  LogValue:string;
+  LogText:string;
+}
+interface IComparisonType{
+
+  ComValue: string;
+  ComText: string;
 }

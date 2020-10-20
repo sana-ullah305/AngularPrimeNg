@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { Template } from '../shared/template.model';
 import { TemplateService } from '../shared/template.service';
 
@@ -10,11 +11,15 @@ import { TemplateService } from '../shared/template.service';
   styleUrls: ['./template-list.component.css']
 })
 export class TemplateListComponent implements OnInit {
-
+  @ViewChild('dt') table: Table;
+  templateList:Template[];
   constructor(public templateService: TemplateService, private messageService: MessageService) { }
-
   ngOnInit(): void {
+    debugger;
     this.templateService.getAllTemplates();
+    this.templateService.loading = false;
+    this.templateList = this.templateService.templateList
+    console.log(this.templateList);
   }
 
   loadKeywordListData(templateId){
@@ -36,11 +41,13 @@ export class TemplateListComponent implements OnInit {
       DocIdentifier: '',
       SenderName: '',
       PictureFileName: '',
+      FlgDeleted:null,
+      UpdatedOnUtc:null,
     }
   }
   onSubmit(form: NgForm) {
     debugger;
-    if (this.templateService.templateFormData.Id === null || this.templateService.templateFormData.Id)
+    if (this.templateService.templateFormData.Id === null || this.templateService.templateFormData.Id == 0)
       this.insertRecord(form);
     else
       this.updateRecord(form);
@@ -85,5 +92,17 @@ export class TemplateListComponent implements OnInit {
     this.templateService.showHideKeywordEelementsModel = false;
     this.templateService.showHideKeywordModel = false;
     console.log(this.templateService.templateFormData);
+  }
+
+  reloadTemplateTable(){
+    debugger;
+    this.templateService.getAllTemplates();
+    this.templateList = this.templateService.templateList;
+  }
+
+  addNewTemplate(){
+    debugger;
+    this.resetForm();
+    this.templateService.showHideTemplateModel = true;
   }
 }

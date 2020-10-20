@@ -4,6 +4,8 @@ export class Template {
     DocIdentifier:string;
     SenderName:string;
     PictureFileName:string;
+    FlgDeleted:boolean;
+    UpdatedOnUtc:Date;
 
         // [MaxLength(50)]
     // public string TemplateName { get; set; }
