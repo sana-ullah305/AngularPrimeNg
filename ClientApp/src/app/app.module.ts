@@ -38,6 +38,7 @@ import { KeywordListComponent } from './template/keyword-list/keyword-list.compo
 import { KeywordElementListComponent } from './template/keyword-element-list/keyword-element-list.component';
 import { TemplateService } from './template/shared/template.service';
 import {DialogModule} from 'primeng/dialog';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import {DialogModule} from 'primeng/dialog';
     TemplateComponent,
     TemplateListComponent,
     KeywordListComponent,
-    KeywordElementListComponent
+    KeywordElementListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

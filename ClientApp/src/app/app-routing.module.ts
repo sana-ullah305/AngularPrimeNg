@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaymentDetailListComponent } from './payment-details/payment-detail-list/payment-detail-list.component';
 import { PaymentDetailComponent } from './payment-details/payment-detail/payment-detail.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
     // ],
   },
   { path: '', redirectTo: 'app-payment-details', pathMatch: 'full' },
+  { path: 'app-login', component: LoginComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
 
